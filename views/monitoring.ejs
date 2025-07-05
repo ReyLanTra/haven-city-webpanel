@@ -1,0 +1,39 @@
+<%- include('partials/header', { title: 'Live Monitoring', user: user }) %>
+
+<h2 class="text-2xl font-bold mb-4">🎮 Live Monitoring Server</h2>
+
+<% if (error) { %>
+  <div class="bg-red-600 text-white p-4 rounded mb-4">❌ Gagal menghubungi server: <%= error %></div>
+<% } else { %>
+  <div class="bg-gray-800 text-white p-4 rounded shadow">
+    <p><strong>Status:</strong> <%= status %></p>
+    <% if (data) { %>
+      <p><strong>Hostname:</strong> <%= data.hostname %></p>
+      <p><strong>Gamemode:</strong> <%= data.gamemode %></p>
+      <p><strong>Map:</strong> <%= data.mapname %></p>
+      <p><strong>Player Online:</strong> <%= data.online %> / <%= data.maxplayers %></p>
+
+      <% if (data.players && data.players.length > 0) { %>
+        <h3 class="mt-4 font-semibold">👥 Daftar Pemain:</h3>
+        <ul class="list-disc ml-6 mt-2">
+          <% data.players.forEach(player => { %>
+            <li><%= player.name %> (Score: <%= player.score %>)</li>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <p class="text-gray-400 mt-2">Tidak ada pemain online saat ini.</p>
+      <% } %>
+    <% } %>
+  </div>
+<% } %>
+
+<a href="/admin/monitoring" class="inline-block mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded">🔄 Refresh</a>
+
+<script>
+  // Auto-refresh tiap 30 detik
+  setTimeout(() => {
+    window.location.reload();
+  }, 30000);
+</script>
+
+<%- include('partials/footer') %>

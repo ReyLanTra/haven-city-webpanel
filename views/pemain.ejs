@@ -1,0 +1,50 @@
+<%- include('partials/header', { title: 'Data Pemain', user: user }) %>
+
+<h2 class="text-2xl font-bold mb-4">👥 Data Pemain</h2>
+
+<% if (typeof error !== 'undefined' && error) { %>
+  <div class="bg-red-600 text-white p-4 rounded">❌ <%= error %></div>
+<% } else if (players.length === 0) { %>
+  <p class="text-gray-400">Tidak ada data pemain ditemukan.</p>
+<% } else { %>
+  <div class="overflow-x-auto">
+    <table class="table-auto w-full text-sm text-left text-white">
+      <thead class="bg-indigo-700 text-white">
+        <tr>
+          <th class="px-4 py-2">Username</th>
+          <th class="px-4 py-2">Money</th>
+          <th class="px-4 py-2">Gold</th>
+          <th class="px-4 py-2">HP</th>
+          <th class="px-4 py-2">Armor</th>
+          <th class="px-4 py-2">Phone</th>
+          <th class="px-4 py-2">Skin</th>
+          <th class="px-4 py-2">Level</th>
+          <th class="px-4 py-2">Admin</th>
+          <th class="px-4 py-2">Warning</th>
+          <th class="px-4 py-2">Jail</th>
+          <th class="px-4 py-2">Last Login</th>
+        </tr>
+      </thead>
+      <tbody class="bg-gray-800 divide-y divide-gray-700">
+        <% players.forEach(player => { %>
+          <tr>
+            <td class="px-4 py-2 font-semibold"><%= player.username %></td>
+            <td class="px-4 py-2">💵 <%= player.money.toLocaleString() %></td>
+            <td class="px-4 py-2">🪙 <%= player.gold %></td>
+            <td class="px-4 py-2">❤️ <%= player.health %></td>
+            <td class="px-4 py-2">🛡️ <%= player.armour %></td>
+            <td class="px-4 py-2"><%= player.phone %></td>
+            <td class="px-4 py-2">🎭 <%= player.skin %></td>
+            <td class="px-4 py-2">🔼 <%= player.level %></td>
+            <td class="px-4 py-2"><%= player.admin %></td>
+            <td class="px-4 py-2"><%= player.warn %></td>
+            <td class="px-4 py-2"><%= player.jail %></td>
+            <td class="px-4 py-2 text-xs text-gray-300"><%= player.last_login %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
+
+<%- include('partials/footer') %>

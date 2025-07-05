@@ -1,0 +1,18 @@
+<%- include('partials/header', { title: 'Dashboard', user: user }) %>
+
+<h2 class="text-2xl font-bold mb-4">Selamat datang, <%= user.username %>!</h2>
+<p class="mb-4">Kamu login pada: <%= loginTime %></p>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <a href="/admin/pemain" class="bg-gray-800 p-4 rounded-xl shadow hover:bg-gray-700 transition">
+    👥 <strong>Data Pemain</strong><br>Lihat statistik pemain dari database
+  </a>
+  <a href="/admin/monitoring" class="bg-gray-800 p-4 rounded-xl shadow hover:bg-gray-700 transition">
+    📈 <strong>Monitoring</strong><br>Live Monitoring Server Haven City Roleplay
+  </a>
+  <a href="/admin/aksi" class="bg-gray-800 p-4 rounded-xl shadow hover:bg-gray-700 transition">
+    🛠️ <strong>Tools Admin</strong><br>Peralatan Admin Haven City Roleplay 
+  </a>
+</div>
+
+<%- include('partials/footer') %>

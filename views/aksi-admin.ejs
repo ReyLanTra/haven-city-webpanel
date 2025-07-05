@@ -1,0 +1,165 @@
+<%- include('partials/header', { title: 'Aksi Admin', user: user }) %>
+
+<h2 class="text-2xl font-bold mb-4">🛠️ Aksi Admin Panel</h2>
+
+<% if (message) { %>
+  <div class="bg-gray-800 p-3 rounded text-sm mb-4"><%= message %></div>
+<% } %>
+
+<form method="POST" action="/admin/aksi" class="space-y-6">
+  <div>
+    <label class="block mb-1 font-semibold">Nama Player</label>
+    <input type="text" name="player" required class="form-input" />
+  </div>
+
+  <div>
+    <label class="block mb-1 font-semibold">Pilih Aksi</label>
+    <select name="action" id="actionSelect" onchange="toggleFields()" class="form-input">
+      <option value="">-- Pilih Aksi --</option>
+      <option value="setmoney">Set Money</option>
+      <option value="sethp">Set HP</option>
+      <option value="setarmor">Set Armor</option>
+      <option value="setweapon">Set Weapon</option>
+      <option value="setphonenumber">Set Phone Number</option>
+      <option value="setrekening">Set Rekening</option>
+      <option value="setskin">Set Skin</option>
+      <option value="setbankmoney">Set Bank Money</option>
+      <option value="setgold">Set Gold</option>
+      <option value="setadminlevel">Set Admin Level</option>
+      <option value="setadminname">Set Admin Name</option>
+      <option value="setname">Set Name</option>
+      <option value="resetweapon">Reset Weapon</option>
+      <option value="setvip">Set VIP</option>
+      <option value="banplayer">Ban Player</option>
+      <option value="warning">Warning</option>
+      <option value="jail">Jail</option>
+    </select>
+  </div>
+
+  <!-- Semua aksi di-render dan disembunyikan -->
+  <div id="fields">
+
+    <div id="setmoney" class="action-field hidden">
+      <label>Jumlah Uang</label>
+      <input type="number" name="amount_setmoney" class="form-input" />
+    </div>
+
+    <div id="sethp" class="action-field hidden">
+      <label>Jumlah HP</label>
+      <input type="number" name="amount_sethp" class="form-input" />
+    </div>
+
+    <div id="setarmor" class="action-field hidden">
+      <label>Jumlah Armor</label>
+      <input type="number" name="amount_setarmor" class="form-input" />
+    </div>
+
+    <div id="setweapon" class="action-field hidden">
+      <label>Weapon ID</label>
+      <input type="number" name="amount_setweapon" class="form-input" />
+    </div>
+
+    <div id="setphonenumber" class="action-field hidden">
+      <label>Nomor HP Baru</label>
+      <input type="text" name="amount_setphonenumber" class="form-input" />
+    </div>
+
+    <div id="setrekening" class="action-field hidden">
+      <label>Nomor Rekening</label>
+      <input type="text" name="amount_setrekening" class="form-input" />
+    </div>
+
+    <div id="setskin" class="action-field hidden">
+      <label>Skin ID</label>
+      <input type="number" name="amount_setskin" class="form-input" />
+    </div>
+
+    <div id="setbankmoney" class="action-field hidden">
+      <label>Uang Bank</label>
+      <input type="number" name="amount_setbankmoney" class="form-input" />
+    </div>
+
+    <div id="setgold" class="action-field hidden">
+      <label>Jumlah Gold</label>
+      <input type="number" name="amount_setgold" class="form-input" />
+    </div>
+
+    <div id="setadminlevel" class="action-field hidden">
+      <label>Level Admin</label>
+      <input type="number" name="amount_setadminlevel" class="form-input" />
+    </div>
+
+    <div id="setadminname" class="action-field hidden">
+      <label>Nama Admin Baru</label>
+      <input type="text" name="amount_setadminname" class="form-input" />
+    </div>
+
+    <div id="setname" class="action-field hidden">
+      <label>Nama Baru Player</label>
+      <input type="text" name="amount_setname" class="form-input" />
+    </div>
+
+    <div id="resetweapon" class="action-field hidden">
+      <p class="text-sm text-gray-400">⚠️ Semua senjata akan dihapus dari pemain ini.</p>
+    </div>
+
+    <div id="setvip" class="action-field hidden">
+      <label>Level VIP</label>
+      <select name="vip_level" class="form-input">
+        <option value="1">1 - Regular</option>
+        <option value="2">2 - Premium</option>
+        <option value="3">3 - Diamond</option>
+      </select>
+      <label class="mt-2 block">Durasi VIP (hari, 0 = permanen)</label>
+      <input type="number" name="vip_duration" class="form-input" />
+    </div>
+
+    <div id="banplayer" class="action-field hidden">
+      <label>Alasan Ban</label>
+      <textarea name="ban_reason_banplayer" class="form-input" rows="3"></textarea>
+    </div>
+
+    <div id="warning" class="action-field hidden">
+      <label>Alasan Warning</label>
+      <textarea name="ban_reason_warning" class="form-input" rows="3"></textarea>
+    </div>
+
+    <div id="jail" class="action-field hidden">
+      <label>Durasi Jail (menit)</label>
+      <input type="number" name="amount_jail" class="form-input" />
+      <label>Alasan Jail</label>
+      <textarea name="ban_reason_jail" class="form-input" rows="3"></textarea>
+    </div>
+  </div>
+
+  <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">
+    ✅ Jalankan Aksi
+  </button>
+</form>
+
+<script>
+function toggleFields() {
+  document.querySelectorAll('.action-field').forEach(div => {
+    div.classList.add('hidden');
+  });
+  const action = document.getElementById('actionSelect').value;
+  if (action) {
+    const target = document.getElementById(action);
+    if (target) target.classList.remove('hidden');
+  }
+}
+</script>
+
+<style>
+.form-input {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #2d2d2d;
+  border: 1px solid #555;
+  border-radius: 0.375rem;
+  margin-top: 0.25rem;
+}
+.hidden { display: none; }
+</style>
+
+<%- include('partials/footer') %>

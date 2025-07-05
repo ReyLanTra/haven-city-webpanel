@@ -1,0 +1,23 @@
+/* Custom styling untuk Web Panel */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1, h2, h3 {
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+.card {
+  background: #1f2937;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+  background: #374151;
+}

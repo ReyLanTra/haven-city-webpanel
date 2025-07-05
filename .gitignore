@@ -1,0 +1,18 @@
+# ❌ Jangan upload file sensitif & berat
+.env
+node_modules/
+.DS_Store
+*.log
+
+# File IDE/editor lokal
+.vscode/
+.idea/
+
+# Folder Vercel
+.vercel/
+
+# Lock file npm
+package-lock.json
+
+# File sistem Windows/macOS
+Thumbs.db
